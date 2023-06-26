@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculadora de Resistencias</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <h1>Calculadora de Resistencias</h1>
+    <form action="calcular_resistencia.php" method="post">
+        <label for="banda1">Banda 1:</label>
+        <select name="banda1" id="banda1">
+            <option value="negro">Negro</option>
+            <option value="marron">Marron</option>
+            <option value="rojo">Rojo</option>
+            <option value="naranja">Naranja</option>
+            <option value="amarillo">Amarillo</option>
+            <option value="verde">Verde</option>
+            <option value="azul">Azul</option>
+            <option value="violeta">Violeta</option>
+            <option value="gris">Gris</option>
+            <option value="blanco">Blanco</option>
+        </select>
+
+        <label for="banda2">Banda 2:</label>
+        <select name="banda2" id="banda2">
+            <option value="negro">Negro</option>
+            <option value="marron">Marron</option>
+            <option value="rojo">Rojo</option>
+            <option value="naranja">Naranja</option>
+            <option value="amarillo">Amarillo</option>
+            <option value="verde">Verde</option>
+            <option value="azul">Azul</option>
+            <option value="violeta">Violeta</option>
+            <option value="gris">Gris</option>
+            <option value="blanco">Blanco</option>
+        </select>
+
+        <label for="banda3">Banda 3:</label>
+        <select name="banda3" id="banda3">
+            <option value="negro">Negro</option>
+            <option value="marron">Marron</option>
+            <option value="rojo">Rojo</option>
+            <option value="naranja">Naranja</option>
+            <option value="amarillo">Amarillo</option>
+            <option value="verde">Verde</option>
+            <option value="azul">Azul</option>
+            <option value="violeta">Violeta</option>
+            <option value="gris">Gris</option>
+            <option value="blanco">Blanco</option>
+        </select>
+
+        <label for="banda4">Banda 4:</label>
+        <select name="banda4" id="banda4">
+            <option value="marron">Marron</option>
+            <option value="rojo">Rojo</option>
+            <option value="verde">Verde</option>
+            <option value="azul">Azul</option>
+            <option value="violeta">Violeta</option>
+            <option value="gris">Gris</option>
+            <option value="oro">Oro</option>
+            <option value="plata">Plata</option>
+        </select>
+
+        <input type="button" value="Calcular" onclick="calcularResistencia()">
+    </form>
+    
+    <div id="resultado"></div>
+    
+    <script>
+        function calcularResistencia() {
+            // Obtener los valores seleccionados por el usuario
+            var banda1 = document.getElementById('banda1').value;
+            var banda2 = document.getElementById('banda2').value;
+            var banda3 = document.getElementById('banda3').value;
+            var banda4 = document.getElementById('banda4').value;
+    
+            // Hacer una solicitud al archivo PHP para realizar el cálculo de la resistencia
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    // Actualizar el contenido del elemento 'resultado' con la respuesta recibida
+                    document.getElementById('resultado').innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("POST", "calcular_resistencia.php", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("banda1=" + banda1 + "&banda2=" + banda2 + "&banda3=" + banda3 + "&banda4=" + banda4);
+        }
+    </script>
+</body>
+</html>
